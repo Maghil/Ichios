@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     #added by devs
     #add new app below this
     'rest_framework',
-    'homepage.apps.homepageConfig',
+    'homepage.apps.HomepageConfig',
 ]
 
 MIDDLEWARE = [
