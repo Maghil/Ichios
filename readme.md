@@ -1,5 +1,5 @@
 ## Installing requirements ##
-> pip install requirements.txt
+> pip install -r requirements.txt
 
 ## Setting up .env file ##
 1. Create a file ".env" under folder Ichios/Ichios
