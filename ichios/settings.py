@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import environ
+import environ,os
 
 root = environ.Path(__file__)  # get root of the project
 env = environ.Env()
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'ichios.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates',(os.path.join(BASE_DIR,'media'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,4 +130,7 @@ USE_TZ = True
 STATIC_URL = '/assets/'
 STATICFILES_DIRS = [
     BASE_DIR/"assets/",
+    os.path.join(BASE_DIR,'media'),
 ]
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL  ='/media/'

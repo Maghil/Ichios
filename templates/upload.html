@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ /* background-image: linear-gradient(to right, #4d58ff 0%, #7b42ff 100%); for later use bg color*/
+</style>
+<script>
+setInterval(rmr, 3000);
+
+    function rmr() {
+        var myobj = document.getElementById('alerttxt');
+        if(myobj!=null){
+          document.getElementById('spintax').style.display="none"
+          myobj.remove();
+        }
+    }
+    function showspin()
+    {
+      document.getElementById('spintax').style.display="block"
+    }
+    
+    </script>
+</head>
+<body class="bg">
+   
+  <div class="secd">
+  <div class="card contr">
+<form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data" >{% csrf_token %}
+    <h1>Upload</h1>
+    <div style="display: none;" id="spintax"><center><h4>Please wait while Uploading...!</h4>
+    <div id="loadspinner" class="spin"></div></center></div>
+    {% include 'others/messages.html' %}
+    <hr>
+
+    <label for="{{form.nm.id_for_label}}"><b>Name*</b></label>
+    <!--<input  type="text" placeholder="Enter here...!" name="nm" id="nm" required>-->
+    {{form.name}}
+    <label for="{{form.des.id_for_label}}"><b>Description*</b></label>
+    <!--<input type="text" placeholder="Something that describes" name="des" id="des" required>-->
+    {{form.description}}
+    <label for="{{form.tgs.id_for_label}}"><b>#Tags*</b></label>
+    <!--<input type="text" placeholder="Something like this #Nani #LOL #HeheBoi" name="tgs" id="tgs" required>-->
+    {{form.tags}}
+     <label for="{{form.flnm.id_for_label}}"><b>Select File*</b></label><br>
+     <!--<input accept="audio/*"  type="file" id="flnm" name="flnm"><br>-->
+     {{form.filename}}
+  
+    <hr>
+	<div><center>
+    <p>Now <a href="/">Go to Home</a>.</p>
+	</center></div>
+    <button onclick="showspin()" type="submit" class="box registerbtn"><b>Upload</b></button>
+    </form>
+</div></div>
+
+
+</body>
+</html>

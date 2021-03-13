@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style>
+</style>
+{% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet"/>
@@ -12,25 +13,25 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"rel="stylesheet"/>
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"rel="stylesheet"/>
-    <title>Document</title>
+    <!-- Local -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/.>
+    <title>ICHIOS</title>
 </head>
 <body>
+
     <section class="header">
-            <nav>
-                <div class="header-navigation">
-                  <div class="container row">
-                    <div class="col">
-                      <a href="active" class="nav-button">Home</a>
-                    </div>
-                      <div class="col">
-                        <a href="#" class="nav-button">Categories</a>
-                      </div>
-                      <div class="col">
-                        <a href="#" class="nav-button">Search</a>
-                      </div>
-                  </div>
-                </div>
-            </nav>
+      <div class="topnav" id="myTopnav">
+        <a  href="/" style=" opacity:100%;
+        color:#fff; font-size: larger;
+      background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);opacity:90%;  text-decoration: none;
+       border-radius:100px;" class="active">ICHIOS </a>
+        <a href="upload/">Upload</a>
+        <a href="#search">Search</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+          <i class="fa fa-bars"></i>
+        </a>
+      </div>
     </section>
 
 
@@ -38,112 +39,21 @@
         <div class="container">
           <div class="row">
 
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
+            {% for d in data %}
+            <div  class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
               <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
+                <img src="{% static 'images/ply.gif' %}" alt="Avatar" style="width:100%">
                 <div class="container">
-                  <h4><b>Master</b></h4> 
+                  <h4 style="margin-top: 5px;"><b>{{d.name}}</b></h4>
+                  <h7><b>{{d.description}}</b></h7><br> 
+                  <h7 style="font-size: smaller;">{{d.tags}}</h7><br> 
                   <audio controls>
-                    <source src="{% static 'audio/Master_the_blaster.mpeg' %}" type="audio/mpeg">
+                    <source src="{{d.files.url}}" type="audio/mpeg">
                   </audio>
                 </div>
               </div>
             </div>
-            
-  
-  
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Chellakuttiye</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/chellakuttiye.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-            
-
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Sheela Ki Jawani</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/sheela_ki_jawani.mpeg' %}" type="audio/mpeg">
-                  </audio> 
-                </div>
-              </div>
-            </div>
-            
-
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Fast And Furious</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/fast_and_furious_7.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Fast And Furious</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/fast_and_furious_7.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Fast And Furious</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/fast_and_furious_7.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Fast And Furious</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/chellakuttiye.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-
-            <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-              <div class="card">
-                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
-                <div class="container">
-                  <h4><b>Kaiyeley_aagasam</b>s</b></h4> 
-                  <audio controls>
-                    <source src="{% static 'audio/Kaiyeley_aagasam.mpeg' %}" type="audio/mpeg">
-                  </audio>
-                </div>
-              </div>
-            </div>
-              
-            
-
-
+            {% endfor %}
           </div>
         </div>
     </section>
@@ -196,5 +106,15 @@
   </footer>
   <!-- Footer -->
     </section>
+    <script>
+      function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+    </script>
 </body>
 </html>
