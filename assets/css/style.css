@@ -30,13 +30,31 @@ html,body{
  opacity:100%;
  text-decoration: none;
 }
-
-
 .topnav .icon {
   display: none;
   text-decoration: none;
 }
 
+.spin {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(55, 41, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: rgb(105, 72, 255);
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {

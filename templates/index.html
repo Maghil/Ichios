@@ -15,8 +15,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"rel="stylesheet"/>
     <!-- Local -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet"/.>
-    <!-- Local -->
-  
     <title>ICHIOS</title>
 </head>
 <body>
@@ -47,7 +45,7 @@
                 <img src="{% static 'images/ply.gif' %}" alt="Avatar" style="width:100%">
                 <div class="container">
                   <h4 style="margin-top: 5px;"><b>{{d.name}}</b></h4>
-                  <h7><b>{{d.desc}}</b></h7><br> 
+                  <h7><b>{{d.description}}</b></h7><br> 
                   <h7 style="font-size: smaller;">{{d.tags}}</h7><br> 
                   <audio controls>
                     <source src="{{d.files.url}}" type="audio/mpeg">
