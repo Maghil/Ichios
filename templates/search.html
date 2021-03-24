@@ -14,25 +14,31 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"rel="stylesheet"/>
     <!-- Local -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet"/.>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
     <title>ICHIOS</title>
 </head>
 <body>
 
     <section class="header">
       <div class="topnav" id="myTopnav">
-        <a  href="/" style=" opacity:100%;
+        <a  href="{% url 'index' %}" style=" opacity:100%;
         color:#fff; font-size: larger;
       background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);opacity:90%;  text-decoration: none;
        border-radius:100px;" class="active">ICHIOS </a>
-        <a href="{% url 'upload' %}">Upload</a>
-        <a href="{% url 'search' %}">Search</a>
+       
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
           <i class="fa fa-bars"></i>
+          <a href="search/">Search for content</a>
         </a>
       </div>
     </section>
+    <div><center>
+        <form style="margin: 20px; padding: 10px;" method="POST" action="{% url 'search' %}"  >{% csrf_token %}
+            {{form.search}}<button style="padding: 16px;;"  type="submit" class="card registerbtn">Search</button>
+            </form>
+            </center>
+    </div>
 
 
     <section id="Load-Page">
@@ -48,7 +54,7 @@
                   <h7><b>{{d.description}}</b></h7><br> 
                   <h7 style="font-size: smaller;">{{d.tags}}</h7><br> 
                   <audio controls>
-                    <source src="{{d.files.url}}" type="audio/wav">
+                    <source src="{{d.files.url}}" type="audio/mpeg">
                   </audio>
                 </div>
               </div>

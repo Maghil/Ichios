@@ -132,7 +132,7 @@
 <body class="bg">
    
   <div class="secd">
-  <div class="card contr">
+  <div class="card container">
 <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data" >{% csrf_token %}
     <h1>Upload</h1>
     <div style="display: none;" id="spintax"><center><h4>Please wait while Uploading...!</h4>
@@ -140,16 +140,16 @@
     {% include 'others/messages.html' %}
     <hr>
 
-    <label for="{{form.nm.id_for_label}}"><b>Name*</b></label>
+    <label for="{{form.name.id_for_label}}"><b>Name*</b></label>
     <!--<input  type="text" placeholder="Enter here...!" name="nm" id="nm" required>-->
     {{form.name}}
-    <label for="{{form.des.id_for_label}}"><b>Description*</b></label>
+    <label for="{{form.description.id_for_label}}"><b>Description*</b></label>
     <!--<input type="text" placeholder="Something that describes" name="des" id="des" required>-->
     {{form.description}}
-    <label for="{{form.tgs.id_for_label}}"><b>#Tags*</b></label>
+    <label for="{{form.tags.id_for_label}}"><b>#Tags*</b></label>
     <!--<input type="text" placeholder="Something like this #Nani #LOL #HeheBoi" name="tgs" id="tgs" required>-->
     {{form.tags}}
-     <label for="{{form.flnm.id_for_label}}"><b>Select File*</b></label><br>
+     <label for="{{form.filenam.id_for_label}}"><b>Select File*(Format Mp3 Supported, and size 4Mb)</b></label><br>
      <!--<input accept="audio/*"  type="file" id="flnm" name="flnm"><br>-->
      {{form.filename}}
   
@@ -157,7 +157,7 @@
 	<div><center>
     <p>Now <a href="/">Go to Home</a>.</p>
 	</center></div>
-    <button onclick="showspin()" type="submit" class="box registerbtn"><b>Upload</b></button>
+    <button onclick="showspin()" type="submit" class="card registerbtn"><b>Upload</b></button>
     </form>
 </div></div>
 
