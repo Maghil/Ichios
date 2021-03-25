@@ -6,7 +6,7 @@ from django.conf import settings
 class RestrictedFileField(forms.FileField):
     def __init__(self, *args, **kwargs):
         self.widget = forms.ClearableFileInput(attrs={'accept':kwargs.pop('accept', None)})
-        self.content_types = kwargs.pop('content_types',"audio/mpeg")
+        self.content_types = kwargs.pop('content_types',"audio/wav")
         self.max_upload_size = kwargs.pop('max_upload_size', None)
         if not self.max_upload_size:
             self.max_upload_size = settings.MAX_UPLOAD_SIZE
