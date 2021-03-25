@@ -46,7 +46,7 @@ def upload(request):
                 context = {
                     'form': UploadForm()
                 }
-                messages.error(request, "Invalid File or format !")
+                messages.error(request, "Explicit content detected or harmul file content")
                 return render(request, 'upload.html', context)
         else:
             context = {

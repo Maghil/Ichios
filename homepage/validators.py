@@ -5,21 +5,31 @@ from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 import re
+import time
+import os
+import environ
+
+root = environ.Path(    )  # get root of the project
+env = environ.Env()
+environ.Env.read_env() 
 
 def validateSoundAssets(value)->bool:
-    with open('temp.wav', 'wb+') as destination:
+    filename = str(time.time())+".wav"
+    with open(filename, 'wb+') as destination:
         destination.write(value.read())
-    if (checkType() and checkAudio()):
+    if (checkType(filename) and checkAudio(filename)):
+        os.remove(filename)
         return True
     else :
+        os.remove(filename)
         return False
 
 
-def checkAudio():
-    authenticator = IAMAuthenticator('KTAC__c-sREYsNJlxDV82U5VQgGdWkgwwGOpWa3N5tdD')
+def checkAudio(filename):
+    authenticator = IAMAuthenticator(env.str('IBM_KEY'))
     service = SpeechToTextV1(authenticator=authenticator)
-    service.set_service_url("https://api.kr-seo.speech-to-text.watson.cloud.ibm.com/instances/8c376c7c-efef-4888-a376-f57fdae6b66a")    
-    with open("temp.wav",'rb') as audio_file:  
+    service.set_service_url(env.str('IBM_URL'))    
+    with open(filename,'rb') as audio_file:  
         dic = json.loads(json.dumps(service.recognize(
                                 audio=audio_file,
                                 content_type='audio/wav',   
@@ -28,14 +38,14 @@ def checkAudio():
                                 model='en-US_NarrowbandModel').get_result(), indent=2))
     str = ""    
     while bool(dic.get('results')):
-        str = dic.get('results').pop().get('alternatives').pop().get('transcript')+str[:]        
+        str = dic.get('results').pop().get('alternatives').pop().get('transcript')+str[:]  
     if(re.search("\*+",str)):
         return False
     else:
         return True
 
-def checkType():
-    with open("temp.wav", "rb") as file:
+def checkType(filename):
+    with open(filename, "rb") as file:
         info = fleep.get(file.read(128))
         if info.extension[0] == 'wav':
             return True
