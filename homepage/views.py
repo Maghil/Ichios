@@ -72,3 +72,4 @@ def search(request):
         'form':uf
       }
     return render(request,'search.html',context)
+
