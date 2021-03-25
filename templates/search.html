@@ -40,15 +40,10 @@
   transition:0.5s;
 }
 
-.topnav a.active {
-margin:10px;
-background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-border-radius:50px;
-  color: white;
-}
+
 
 .topnav .search-container {
-  float: right;
+  float: left;
   margin:10px;
 }
 
@@ -65,7 +60,7 @@ border-radius:50px;
 
 .topnav .search-container button {
 
-  float: right;
+  float: left;
   padding: 6px 10px;
   margin-top: 8px;
   margin-right: 16px;
@@ -126,7 +121,6 @@ opacity:100%;
   <div class="topnav">
     <a class="" href="{% url 'index' %}"><b>ICHIOS</b></a>
     <a href="{% url 'upload' %}">Upload</a>
-    <a class="active" href="{% url 'search' %}">Search</a>
     <div class="search-container">
       <form method="POST" action="{% url 'search' %}" >{% csrf_token %}
         {{form.search}}
