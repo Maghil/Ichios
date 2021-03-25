@@ -1,3 +1,6 @@
 Django >= 3.1.2
 djangorestframework >= 3.12.2
 django-environ  >= 0.4.5
+fleep >= 1.0.1
+ibm-cloud-sdk-core >= 3.8.0
+ibm-watson >= 5.1.0
