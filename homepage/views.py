@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from homepage.forms import UploadForm 
+from homepage.forms import UploadForm ,SearchForm
 from django.http import JsonResponse
 from django.contrib import messages
+from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from homepage.models import Adetails
 from datetime import datetime
@@ -36,7 +37,10 @@ def upload(request):
       }
       return render(request, 'upload.html',context)
     else:
-      messages.error(request,"Your File was No submitted (~_~)")
+      context ={
+      'form':UploadForm()
+      }
+      messages.error(request,"Invalid File or format !")
       return render(request, 'upload.html',context)
 
   else:
@@ -46,3 +50,26 @@ def upload(request):
     }
     return render(request, 'upload.html',context)
 #S0NICRAGE21
+def search(request):
+  uf = SearchForm(request.POST)
+  if request.method == "POST":
+    if uf.is_valid():
+      name = uf.cleaned_data['search']
+      res = Adetails.objects.filter(
+            Q(name__icontains=name) | Q(tags__icontains=name)
+        )
+      context = {
+        'data':res,
+        'form':uf
+      }
+      return render(request,'search.html',context)
+
+  else:
+    #Ignore error below pylint Runs good...! ;)
+    data = Adetails.objects.all()
+    context = {
+        'data':data,
+        'form':uf
+      }
+    return render(request,'search.html',context)
+

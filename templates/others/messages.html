@@ -1,5 +1,9 @@
 {% if messages %}
     {% for messages in messages %}
+    {% if messages.tags == 'error' %}
+    <p id="alerttxt" onload="setTimeout(rmr, 3000);" style="transition: 0.5s; background-image: linear-gradient(to right, #ff7070 0%, #ff2a2a 100%);color: #fff; padding: 12px; border-radius: 50px; font-weight: 100;"><b>&nbsp;{{ messages }}</b></p>    
+    {% elif messages.tags == 'success' %}
     <p id="alerttxt" onload="setTimeout(rmr, 3000);" style="transition: 0.5s; background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);color: #fff; padding: 12px; border-radius: 50px; font-weight: 100;"><b>&nbsp;{{ messages }}</b></p>    
+    {% endif %}
     {% endfor %}
 {% endif %}
