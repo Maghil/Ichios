@@ -14,18 +14,15 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"rel="stylesheet"/>
     <!-- Local -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet"/.>
-    <title>ICHIOS</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link rel="icon" href="/assets/images/ichios.png" type="image/icon type">
+    <title>Ichios</title>
 </head>
 <body>
 
     <section class="header">
       <div class="topnav" id="myTopnav">
-        <a  href="/" style=" opacity:100%;
-        color:#fff; font-size: larger;
-      background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);opacity:90%;  text-decoration: none;
-       border-radius:100px;" class="active">ICHIOS </a>
+        <a  href="/" class="active">ICHIOS </a>
         <a href="upload/">Upload</a>
         <a href="#search">Search</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -42,14 +39,16 @@
             {% for d in data %}
             <div  class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
               <div class="card">
-                <img src="{% static 'images/ply.gif' %}" alt="Avatar" style="width:100%">
+                <img src="{% static 'images/music.jpg' %}" alt="Avatar" style="width:100%">
                 <div class="container">
                   <h4 style="margin-top: 5px;"><b>{{d.name}}</b></h4>
                   <h7><b>{{d.description}}</b></h7><br> 
                   <h7 style="font-size: smaller;">{{d.tags}}</h7><br> 
+                  <div>
                   <audio controls>
                     <source src="{{d.files.url}}" type="audio/mpeg">
                   </audio>
+                  </div>
                 </div>
               </div>
             </div>

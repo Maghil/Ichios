@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/assets/images/ichios.png" type="image/icon type">
     <style>
        .spin {
             display: inline-block;
@@ -128,11 +129,12 @@
         }
         
         </script>
+    <title>Ichios</title>
     </head>
 <body class="bg">
    
   <div class="secd">
-  <div class="card contr">
+  <div class="card container">
 <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data" >{% csrf_token %}
     <h1>Upload</h1>
     <div style="display: none;" id="spintax"><center><h4>Please wait while Uploading...!</h4>

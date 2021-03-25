@@ -17,7 +17,6 @@ html,body{
   float: left;
   display: block;
   text-align: center;
-  opacity:80%;
   transition: 0.3s;
   margin:10px;
 	color:#aaa;
@@ -29,6 +28,7 @@ html,body{
 .topnav a:hover {
  opacity:100%;
  text-decoration: none;
+ color :black;
 }
 .topnav .icon {
   display: none;
