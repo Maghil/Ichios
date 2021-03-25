@@ -6,6 +6,3 @@ class Adetails(models.Model):
     tags = models.CharField(max_length=500,null=False)
     hash_value = models.CharField(default=False,max_length=50,null=False)
     files = models.FileField(upload_to='')
-    
-
- 
