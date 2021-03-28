@@ -1,6 +1,7 @@
 from django.db import models
 
 class Adetails(models.Model):
+    ip = models.TextField(default="")
     name = models.CharField(max_length=10,null=False)
     description = models.CharField(max_length=150,null=False)
     tags = models.CharField(max_length=500,null=False)

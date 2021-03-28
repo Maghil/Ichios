@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #add new app below this
     'rest_framework',
     'homepage.apps.HomepageConfig',
+    'ichiosManaged',
 ]
 
 MIDDLEWARE = [
