@@ -9,7 +9,7 @@ import time
 import os
 import environ
 
-root = environ.Path(    )  # get root of the project
+# root = environ.Path(    )  # get root of the project
 env = environ.Env()
 environ.Env.read_env() 
 
@@ -29,13 +29,16 @@ def checkAudio(filename):
     authenticator = IAMAuthenticator(env.str('IBM_KEY'))
     service = SpeechToTextV1(authenticator=authenticator)
     service.set_service_url(env.str('IBM_URL'))    
-    with open(filename,'rb') as audio_file:  
-        dic = json.loads(json.dumps(service.recognize(
-                                audio=audio_file,
-                                content_type='audio/wav',   
-                                timestamps=True,
-                                word_confidence=True,
-                                model='en-US_NarrowbandModel').get_result(), indent=2))
+    try:
+        with open(filename,'rb') as audio_file:  
+            dic = json.loads(json.dumps(service.recognize(
+                                    audio=audio_file,
+                                    content_type='audio/wav',   
+                                    timestamps=True,
+                                    word_confidence=True,
+                                    model='en-US_NarrowbandModel').get_result(), indent=2))
+    except:
+        return(False)
     str = ""    
     while bool(dic.get('results')):
         str = dic.get('results').pop().get('alternatives').pop().get('transcript')+str[:]  
