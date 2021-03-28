@@ -1,0 +1,60 @@
+html,body{
+    margin: 0;
+    background:#fff;
+}
+
+.spin {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(55, 41, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: rgb(105, 72, 255);
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+
+
+
+.text-justify{
+    text-align: justify;
+    text-justify: inter-word;
+}
+footer{
+    padding-top: 15px;
+}
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin: 0.3rem;
+}  
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+#Load-Page{
+    padding: 20px;
+}
+#alerttxt
+{
+transition: 0.5s;
+background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+color: #fff;
+padding: 12px;
+border-radius: 50px; 
+font-weight: 100;
+}
+.justify-content{
+    align-items: center;
+}
