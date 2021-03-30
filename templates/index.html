@@ -3,6 +3,7 @@
 
 <head>
   {% load static %}
+  {% load filter_tags %}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -109,6 +110,10 @@
       background-color: tomato;
       transition: 0.2s;
     }
+
+    body{
+      color : black;
+    }
   </style>
 </head>
 
@@ -130,9 +135,16 @@
           <div class="card">
             <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
             <div class="container">
-              <h4 style="margin-top: 5px;"><b>Name&nbsp;</b>{{d.name}}</h4>
-              <h7><b>Description&nbsp;</b>{{d.description}}</h7><br>
-              <h7 style="font-size: smaller;"><i>#Tags</i> &nbsp;{{d.tags}}</h7><br>
+              <h3 style="margin-top: 5px;">{{d.name}}</h3>
+              <h7>{{d.description}}</h7><br>
+              <h7><i>
+                {% with d.tags|split:" " as tags %}
+                  {% for tag in tags %}
+                      #{{tag}}&nbsp&nbsp
+                  {% endfor %}
+                {% endwith %}
+              </i></h7>
+              <br>
               <audio controls>
                 <source src="{{d.files.url}}" type="audio/mpeg">
               </audio>
