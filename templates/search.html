@@ -16,7 +16,7 @@
   <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
   <!-- Local -->
-  <title>ICHIOS</title>
+  <title>Search</title>
   <style>
     .topnav {
       overflow: hidden;
@@ -124,15 +124,18 @@
       background-color: tomato;
       transition: 0.2s;
     }
+    body{
+      background-color: #edeffc;
+    }
   </style>
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
-  <title>Ichios</title>
+  <title>Search</title>
 </head>
 
 <body>
   <div id="overlay"></div>
   <div class="topnav">
-    <a class="" href="{% url 'index' %}"><b>ICHIOS</b></a>
+    <a class="" href="{% url 'index' %}">Home</a>
     <a href="{% url 'upload' %}">Upload</a>
     <div class="search-container">
       <form method="POST" action="{% url 'search' %}">{% csrf_token %}
