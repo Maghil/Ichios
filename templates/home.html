@@ -1,9 +1,10 @@
 <html>
 	<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Dashboard</title>
+	<title>ICHIOS Admin - Overview</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/style1.css"/>
+	<link rel="icon" href="/assets/images/ichios.png" type="image/icon type">
 	</head>
     {% if request.user.is_authenticated %}
 	
@@ -26,7 +27,7 @@
 	sharing services</p>
 	</center>
 	</div>
-  <a class="activeslide" href="{% url 'ichome' %}"><i class="fa fa-area-chart"></i> OverView</a>
+  <a class="activeslide" href="{% url 'ichome' %}"><i class="fa fa-area-chart"></i> Overview</a>
   <a href="{% url 'icrecent' %}"><i class="fa fa-fw fa-history"></i> Recent</a>
   <a href="{% url 'iclogs' %}"><i class="fa fa-file-text"></i> Logs</a>
   <a href="{% url 'iccontent' %}"><i class="fa fa-file"></i> Content</a>

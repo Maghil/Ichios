@@ -17,8 +17,7 @@ def reg(request):
             form.save()
             messages.success(request, "User Registered successfully...!")
             #logs
-            now = datetime.datetime.now()
-            logs(l_loc="Ichios Registration - Success",L_Description="User profile was created in the name of "+str(username)+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+            logging_ctx("Ichios Registration - Success","User profile was created in the name of "+str(username)+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
             context = {
                  'form': RegForm()
             }
@@ -30,10 +29,8 @@ def reg(request):
                  'form': RegForm()
             }
               #logs
-              now = datetime.datetime.now()
-              logs(l_loc="Ichios Registration - Failed",L_Description="Name of the user is "
-              +str(form.fields['username'])+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-              l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+              logging_ctx("Ichios Registration - Failed","Name of the user is "
+              +str(form.fields['username'])+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
               #End logs
               return render(request, 'register.html', context)
     else:
@@ -42,10 +39,8 @@ def reg(request):
         'form': RegForm()
         }
         #logs
-        now = datetime.datetime.now()
-        logs(l_loc="Page Access - Ichios Registration",L_Description="Accessing a restricted page Alert...! "
-        +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-        l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+        logging_ctx("Page Access - Ichios Registration","Accessing a restricted page Alert...! "
+        +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
         #End logs
         return render(request, 'register.html', context)
 
@@ -60,28 +55,22 @@ def logon(request):
                 if user.is_active:
                     login(request, user)
                     #logs
-                    now = datetime.datetime.now()
-                    logs(l_loc="Ichios Login - Success",L_Description="User logoned use this credential name "
-                    +username+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-                    l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+                    logging_ctx("Ichios Login - Success","User logoned use this credential name "
+                    +username+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
                     #End logs
                     return redirect(dashboard)
             else:
                 #logs
-                now = datetime.datetime.now()
-                logs(l_loc="Ichios Login - Failed",L_Description="User try to login using this credential name "
-                +username+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-                l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+                logging_ctx("Ichios Login - Failed","User try to login using this credential name "
+                +username+",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
                 #End logs
                 messages.error(request, "Invalid username or password.")
                 form = LoginForm()
                 return render(request,"login.html",context={"form":form})
         else:
             #logs
-            now = datetime.datetime.now()
-            logs(l_loc="Ichios Login - Failed",L_Description="Fields are not valid "
-            +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-            l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+            logging_ctx("Ichios Login - Failed","Fields are not valid "
+            +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
             #End logs
             messages.error(request, "Invalid username or password.")
             form = LoginForm()
@@ -104,10 +93,8 @@ def dashboard(request):
 
 def logoutUser(request):
     #logs
-    now = datetime.datetime.now()
-    logs(l_loc="Ichios Admin - Logout",L_Description="User Logout of the system "
-    +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-    l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+    logging_ctx("Ichios Admin - Logout","User Logout of the system "
+    +",by this IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
     #End logs
     logout(request)
     return redirect(logon)
@@ -146,3 +133,7 @@ def delete_file(request,hash_value):
     data_to_del = Adetails.objects.get(hash_value=hash_value)
     data_to_del.delete()  
     return redirect(content)
+
+def logging_ctx(title,description):
+     now = datetime.datetime.now()
+     logs(l_loc=title,L_Description=description,l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()

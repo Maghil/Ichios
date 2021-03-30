@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from homepage.models import Adetails
 from ichiosManaged.models import statistics_oneword,logs,recent
+from ichiosManaged.views import logging_ctx
 from datetime import datetime
 from django.db.models import F
 from django.conf import settings
@@ -29,10 +30,8 @@ def index(request):
     ##End
 
     #logs
-    now = datetime.datetime.now()
-    logs(l_loc="Ichios - Request",L_Description="User accessing the site by this IP "
-    + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-    l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+    logging_ctx("Ichios - Request","User accessing the site by this IP "
+    + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
     #End logs
 
     return render(request, 'index.html', context)
@@ -71,10 +70,8 @@ def upload(request):
                 ##End
                 
                 #logs
-                now = datetime.datetime.now()
-                logs(l_loc="Ichios FileUpload - Success",L_Description="User uploaded file "+name +" the site by this IP "
-                + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-                l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+                logging_ctx("Ichios FileUpload - Success","User uploaded file "+name +" the site by this IP "
+                + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
                 #End logs
 
                 return render(request, 'upload.html', context)
@@ -92,10 +89,8 @@ def upload(request):
                 ##End
 
                 #logs
-                now = datetime.datetime.now()
-                logs(l_loc="Ichios FileUpload - Failed",L_Description="User uploaded file "+name +" that was rejected due to restrictions the site , IP "
-                + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-                l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+                logging_ctx("Ichios FileUpload - Failed","User uploaded file "+name +" that was rejected due to restrictions the site , IP "
+                + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
                 #End logs
                 return render(request, 'upload.html', context)
         else:
@@ -103,10 +98,8 @@ def upload(request):
                 'form': UploadForm()
             }
             #logs
-            now = datetime.datetime.now()
-            logs(l_loc="Ichios FileUpload - Failed",L_Description="User upload Data invalid, IP "
-            + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-            l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+            logging_ctx("Ichios FileUpload - Failed","User upload Data invalid, IP "
+            + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
             #End logs
             messages.error(request, "Invalid File or format !")
             return render(request, 'upload.html', context)
@@ -115,10 +108,8 @@ def upload(request):
             'form': UploadForm()
         }
         #logs
-        now = datetime.datetime.now()
-        logs(l_loc="Ichios FileUpload - Access",L_Description="User accessed the page by this IP "
-        + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-        l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+        logging_ctx("Ichios FileUpload - Access","User accessed the page by this IP "
+        + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
         #End logs
         return render(request, 'upload.html', context)
 
@@ -149,10 +140,8 @@ def search(request):
             ##End
             
             #logs
-            now = datetime.datetime.now()
-            logs(l_loc="Ichios Search - Request",L_Description="User requested to search "+name+"  by this IP "
-            + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-            l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+            logging_ctx("Ichios Search - Request","User requested to search "+name+"  by this IP "
+            + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
             #End logs
 
             return render(request, 'search.html', context)
@@ -165,10 +154,8 @@ def search(request):
             'form': uf
         }
         #logs
-        now = datetime.datetime.now()
-        logs(l_loc="Ichios Search - Access",L_Description="User Accessed this page by this IP "
-        + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'],
-        l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+        logging_ctx("Ichios Search - Access","User Accessed this page by this IP "
+        + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
         #End logs
         return render(request, 'search.html', context)
 
