@@ -1,0 +1,66 @@
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ICHIOS Admin - Logs</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/style1.css"/>
+	<link rel="icon" href="/assets/images/ichios.png" type="image/icon type">
+	</head>
+    {% if request.user.is_authenticated %}
+	
+	<body>
+	<header class="header">
+  <a href="" class="logo">Admin</a>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a href="#user"><i class="fa fa-user-circle"></i>&nbsp;{{ request.user.username }}</a></li>
+    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>&nbsp;Logout</a></li>
+  </ul>
+</header>
+<div>
+	<div class="sidebar">
+	<div class="sp">&nbsp;
+	<center>
+	<h1 style="color:#4e45f9;">ICHIOS</h1>
+	<p style="color:gray;">Sound Hosting and <br>
+	sharing services</p>
+	</center>
+	</div>
+  <a href="{% url 'ichome' %}"><i class="fa fa-area-chart"></i> OverView</a>
+  <a href="{% url 'icrecent' %}"><i class="fa fa-fw fa-history"></i> Recent</a>
+  <a class="activeslide" href="{% url 'iclogs' %}"><i class="fa fa-file-text"></i> Logs</a>
+  <a href="{% url 'iccontent' %}"><i class="fa fa-file"></i> Content</a>
+  <a style="display: none;" href="#"><i class="fa fa-user-secret"></i> Settings</a>
+</div>
+<div  class="maincontent">
+	
+	
+	<h3 style="color:#555;">Log's</h3>
+	<table >
+        
+		<tr>
+			<th>#</th>
+			<th>Log Type</th>
+			<th>Description</th>
+			<th>On</th>
+		</tr>
+        {% for d in logs %}
+		<tr>
+			<td>{{forloop.counter}}</td>
+			<td>{{d.l_loc}}</td>
+			<td>{{d.L_Description}}</td>
+			<td>{{d.l_datetime}}</td>
+		</tr>
+        {% endfor %}
+	 </table>
+	 <br>
+	
+</div>
+</div>
+	</body>
+    {% else %}
+     <h2 style="margin:20px;">Access Denied...!</h2>
+     <p style="margin:20px;">You have no permission to view this page (X_X)</p>
+    {% endif %}
+</html>
