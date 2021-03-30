@@ -73,6 +73,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                # make your file entry here.
+                'filter_tags': 'homepage.addons.filter',
+            }
         },
     },
 ]
