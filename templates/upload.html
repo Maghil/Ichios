@@ -174,7 +174,22 @@
       }
     }
     function showspin() {
-      document.getElementById('spintax').style.display = "block"
+      
+      if(document.getElementById("name").value!="")
+      {
+        if(document.getElementById("desc").value!="")
+        { 
+            if(document.getElementById("tags").value!="")
+            {
+              if(document.getElementsByName("filename").files.length == 0)
+              {
+                document.getElementById('spintax').style.display = "block"
+              }
+            } 
+        }
+      }
+      
+
     }
 
   </script>

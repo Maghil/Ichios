@@ -89,7 +89,7 @@ def upload(request):
                 ##End
 
                 #logs
-                logging_ctx("Ichios FileUpload - Failed","User uploaded file "+name +" that was rejected due to restrictions the site , IP "
+                logging_ctx("Ichios FileUpload - Failed","User uploaded file was rejected due to restrictions the site , IP "
                 + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
                 #End logs
                 return render(request, 'upload.html', context)
