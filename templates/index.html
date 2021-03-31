@@ -8,17 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-  <!-- MDB -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
   <title>Ichios</title>
   <style>
     .topnav {
       overflow: hidden;
+      z-index: 5;
       background-color: #fff;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
@@ -26,7 +24,7 @@
     .topnav a {
       float: left;
       display: block;
-      color: rgb(37, 37, 37);
+      color: black;
       margin: 10px;
       text-align: center;
       padding: 14px 16px;
@@ -40,58 +38,15 @@
       transition: 0.5s;
     }
 
-
-
-    .topnav .search-container {
-      float: right;
-      margin: 10px;
-    }
-
-    .topnav input[type=text] {
-      padding: 6px;
-      margin-top: 8px;
-      font-size: 17px;
-      outline: none;
-      border: 1px solid;
-      border-color: #eaeaea;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-    }
-
     .card {
+      border-radius: 10px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       margin: 5px;
-      border-radius: 10px;
       transition: 0.5s;
     }
 
     .card:hover {
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    .topnav .search-container button:hover {
-      opacity: 100%;
-    }
-
-    @media screen and (max-width: 600px) {
-      .topnav .search-container {
-        float: none;
-      }
-
-      .topnav a,
-      .topnav input[type=text],
-      .topnav .search-container button {
-        float: none;
-        display: block;
-        text-align: left;
-        width: 100%;
-        margin: 0;
-        padding: 14px;
-      }
-
-      .topnav input[type=text] {
-        border: 1px solid #ccc;
-      }
     }
 
     .dwn {
@@ -111,57 +66,173 @@
       transition: 0.2s;
     }
 
-    body{
-      color : black;
+    body {
       background-color: #edeffc;
+      color: black;
+    }
+
+    .flex-row, .flexer, .flex-col{
+      display: flex;
+    }
+
+    .flex-col{
+      flex-direction: column;
+    }
+
+    .flex-row{
+      flex-direction: row;
+    }
+
+    .flexer {
+      width: 100%;
+    }
+
+    html,
+    body {
+      margin: 0;
+      background: #edeffc;
+    }
+
+    .spin {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(55, 41, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: rgb(105, 72, 255);
+      animation: spin 1s ease-in-out infinite;
+      -webkit-animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    @-webkit-keyframes spin {
+      to {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+
+    .text-justify {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    footer {
+      padding-top: 15px;
+    }
+
+    #Load-Page {
+      padding: 20px 0px;
+      min-height: 100vh;
+    }
+
+    #alerttxt {
+      transition: 0.5s;
+      background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+      color: #fff;
+      padding: 12px;
+      border-radius: 50px;
+      font-weight: 100;
+    }
+
+    .justify-content {
+      align-items: center;
+    }
+
+    /* audio{
+      width: 100%;
+    } */
+
+    .audio-div{
+      width: 100%;
+    }
+
+    .tags-outer{
+      margin:5px 00px 8px 0px;
+      font-size: 14px;
+    }
+
+    .tags{
+      color: white;
+      border-radius: 5px;
+      background-color: #00000060;
+      display: inline;
+      padding: 2px 7px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .topnav .search-container {
+        float: none;
+      }
+
+      .topnav a,
+      .topnav input[type=text],
+      .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+        transition: 0.5s;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="flexer flex-col">
 
-  <div class="topnav">
-    <a href="{% url 'index' %}"><b>ICHIOS</b></a>
-    <a href="{% url 'upload' %}">Upload</a>
-    <a href="{% url 'search' %}">Search</a>
-  </div>
+    <div class="topnav">
+      <a href="{% url 'index' %}"><b>Home</b></a>
+      <a href="{% url 'upload' %}">Upload</a>
+      <a href="{% url 'search' %}">Search</a>
+    </div>
 
-  <section id="Load-Page"><br>
-    <div class="container">
-      <div class="row">
-
-        {% for d in data %}
-        <div
-          class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-          <div class="card">
-            <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
-            <div class="container">
-              <h3 style="margin-top: 5px;">{{d.name}}</h3>
-              <h7>{{d.description}}</h7><br>
-              <h7><i>
-                {% with d.tags|split:" " as tags %}
-                  {% for tag in tags %}
-                      #{{tag}}&nbsp&nbsp
-                  {% endfor %}
-                {% endwith %}
-              </i></h7>
-              <br>
-              <audio controls>
-                <source src="{{d.files.url}}" type="audio/mpeg">
-              </audio>
-              <a class="dwn" href="{{d.files.url}}" download="{{d.files}}"><i class="fa fa-download"></i>&nbsp;
-                Download</a>
+    <section id="Load-Page">
+      <div class="container">
+        <div class="row">
+          {% for d in data %}
+          <div class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
+            <div class="card">
+              <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
+              <div class="container">
+                <div>
+                  <h3 style="margin-top: 5px;">{{d.name}}</h3>
+                </div>
+                <div>
+                  <h7>{{d.description}}</h7>
+                </div>
+                <div class="tags-outer">
+                  <h7><i>
+                      {% with d.tags|split:" " as tags %}
+                      {% for tag in tags %}
+                      <div class="tags">{{tag}}</div>
+                      {% endfor %}
+                      {% endwith %}
+                    </i></h7>
+                </div>
+                <div class="flex-row">
+                  <div class="audio-div">
+                    <audio controls controlsList="nodownload"> <source src="{{d.files.url}}" type="audio/mpeg"> </audio>
+                  </div>
+                  <div>
+                    <a class="dwn" href="{{d.files.url}}" download="{{d.files}}"><i class="fa fa-download"></i></a>
+                  </div>  
+                </div>
+              </div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
-    </div>
-  </section><br>
-  <section id="Footer">
-    <!-- Footer -->
+    </section>
+
     <footer class="bg-dark text-justify text-white">
-      <!-- Grid container -->
       <div class="container row">
         <div class="col">
           <section class="mb-4">
@@ -175,38 +246,23 @@
           </section>
         </div>
         <div class="col text-center text-white">
-          <!-- Section: Form -->
           <div class="container p-4">
-            <!-- Section: Social media -->
             <section class="mb-4">
-              <!-- Facebook -->
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-facebook-f"></i></a>
-              <!-- Google -->
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-google"></i></a>
-              <!-- Instagram -->
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-instagram"></i></a>
-              <!-- Linkedin -->
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-linkedin-in"></i></a>
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
             </section>
-            <!-- Section: Text -->
           </div>
         </div>
       </div>
-      <!-- Grid container -->
-
-      <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(116, 116, 116, 0.685);">
         © 2020 Copyright:
         <a class="text-white" href="https://www.google.com/">ichos.com</a>
       </div>
-      <!-- Copyright -->
     </footer>
-    <!-- Footer -->
-  </section>
+
+  </div>
 </body>
 
 </html>

@@ -5,6 +5,7 @@
   {% load static %}
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
+  <title>Upload</title>
   <style>
     .spin {
       display: inline-block;
@@ -47,7 +48,6 @@
       align-items: center;
     }
 
-    /* Add padding to containers */
     .container {
       width: 600px;
       padding: 16px;
@@ -55,7 +55,6 @@
       background-color: white;
     }
 
-    /* Full-width input fields */
     input[type=text] {
       transition: 0.5s;
       width: 100%;
@@ -73,13 +72,11 @@
       outline: none;
     }
 
-    /* Overwrite default styles of hr */
     hr {
       border: 1px solid #f1f1f1;
       margin-bottom: 20px;
     }
 
-    /* Set a style for the submit button */
     .registerbtn {
       transition: 0.5s;
       background-image: linear-gradient(to right, #4d58ff 0%, #7b42ff 100%);
@@ -95,73 +92,64 @@
     }
 
     .registerbtn:hover {
-
       opacity: 1;
     }
 
-    /* Add a blue text color to links */
     a {
       color: dodgerblue;
     }
 
-    /* Set a grey background color and center the text of the "sign in" section */
     .signin {
       background-color: #f1f1f1;
       text-align: center;
     }
 
     .card {
-      /* Add shadows to create the "card" effect */
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       transition: 0.3s;
     }
 
-    /* On mouse-over, add a deeper shadow */
     .card:hover {
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     }
-    .topnav {
-        overflow: hidden;
-        background-color: #fff;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-      }
-      
-      .topnav a {
-        float: left;
-        display: block;
-        color: rgb(37, 37, 37);
-        margin:10px;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      
-      .topnav a:hover {
-        background-color: #ddd;
-        color: black;
-        transition:0.5s;
-      }
-      .topnav .search-container button:hover {
-      opacity:100%;
-      }
-      
-      @media screen and (max-width: 600px) {
-  .topnav .search-container {
-    float: none;
-  }
-  .topnav a, .topnav input[type=text], .topnav .search-container button {
-    float: none;
-    display: block;
-    text-align: left;
-    width: 100%;
-    margin: 0;
-    padding: 14px;
-  }
-  .topnav input[type=text] {
-    border: 1px solid #ccc;  
-  }}
 
+    .topnav {
+      overflow: hidden;
+      z-index: 5;
+      background-color: #fff;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .topnav a {
+      float: left;
+      display: block;
+      color: black;
+      margin: 10px;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover {
+      background-color: #ddd;
+      color: black;
+      transition: 0.5s;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .topnav a,
+      .topnav input[type=text],
+      .topnav .search-container button {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+      }
+    }
   </style>
   <script>
     setInterval(rmr, 3000);
@@ -193,47 +181,44 @@
     }
 
   </script>
-  <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
-  <title>Upload</title>
 </head>
 
-<body class="bg">
-  <div class="topnav">
-    <a href="{% url 'index' %}">Home</a>
-    <a href="{% url 'upload' %}"><b>Upload</b></a>
-    <a href="{% url 'search' %}">Search</a>
-  </div>
-  <div class="secd">
-    <div class="card container">
-      <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">{% csrf_token %}
-        <h1>Upload</h1>
-        <div style="display: none;" id="spintax">
-          <center>
-            <h4>Please wait while Uploading...!</h4>
-            <div id="loadspinner" class="spin"></div>
-          </center>
-        </div>
-        {% include 'others/messages.html' %}
-        <hr>
+<body>
+  <div class="flexer">
 
-        <label for="{{form.name.id_for_label}}"><b>Name*</b></label>
-        <!--<input  type="text" placeholder="Enter here...!" name="nm" id="nm" required>-->
-        {{form.name}}
-        <label for="{{form.description.id_for_label}}"><b>Description*</b></label>
-        <!--<input type="text" placeholder="Something that describes" name="des" id="des" required>-->
-        {{form.description}}
-        <label for="{{form.tags.id_for_label}}"><b>#Tags*</b></label>
-        <!--<input type="text" placeholder="Something like this #Nani #LOL #HeheBoi" name="tgs" id="tgs" required>-->
-        {{form.tags}}
-        <label for="{{form.filenam.id_for_label}}"><b>Select File*(Format WAV Supported, and size 2Mb)</b></label><br>
-        {{form.filename}}
-
-        <hr>
-        <button onclick="showspin()" type="submit" class="card registerbtn"><b>Upload</b></button>
-      </form>
+    <div class="topnav">
+      <a href="{% url 'index' %}">Home</a>
+      <a href="{% url 'upload' %}"><b>Upload</b></a>
+      <a href="{% url 'search' %}">Search</a>
     </div>
-  </div>
 
+    <div class="secd">
+      <div class="card container">
+        <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">{% csrf_token %}
+          <h1>Upload</h1>
+          <div style="display: none;" id="spintax">
+            <center>
+              <h4>Please wait while Uploading...!</h4>
+              <div id="loadspinner" class="spin"></div>
+            </center>
+          </div>
+          {% include 'others/messages.html' %}
+          <hr>
+          <label for="{{form.name.id_for_label}}"><b>Name*</b></label>
+          {{form.name}}
+          <label for="{{form.description.id_for_label}}"><b>Description*</b></label>
+          {{form.description}}
+          <label for="{{form.tags.id_for_label}}"><b>Tags*</b></label>
+          {{form.tags}}
+          <label for="{{form.filenam.id_for_label}}"><b>Select File*(Format WAV Supported, and size 2Mb)</b></label>
+          {{form.filename}}
+          <hr>
+          <button onclick="showspin()" type="submit" class="card registerbtn"><b>Upload</b></button>
+        </form>
+      </div>
+    </div>
+
+  </div>
 
 </body>
 
