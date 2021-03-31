@@ -17,7 +17,6 @@ from .validators import validateSoundAssets
 
 
 def index(request):
-   # Ignore error below pylint Runs good...! ;)
     data = Adetails.objects.all()
     context = {
         'data': data
@@ -72,7 +71,7 @@ def upload(request):
                 #logs
                 logging_ctx("Ichios FileUpload - Success","User uploaded file "+name +" the site by this IP "
                 + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
-                #End logs
+                    #End logs
 
                 return render(request, 'upload.html', context)
             else:
@@ -98,8 +97,7 @@ def upload(request):
                 'form': UploadForm()
             }
             #logs
-            logging_ctx("Ichios FileUpload - Failed","User upload Data invalid, IP "
-            + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
+            logging_ctx("Ichios FileUpload - Failed","User upload Data invalid, IP "+ get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
             #End logs
             messages.error(request, "Invalid File or format !")
             return render(request, 'upload.html', context)
@@ -147,11 +145,10 @@ def search(request):
             return render(request, 'search.html', context)
 
     else:
-        # Ignore error below pylint Runs good...! ;)
         data = Adetails.objects.all()
         context = {
-            'data': data,
-            'form': uf
+            'form': uf,
+            'typehint':"type something in search"
         }
         #logs
         logging_ctx("Ichios Search - Access","User Accessed this page by this IP "
