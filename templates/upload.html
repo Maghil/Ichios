@@ -163,11 +163,11 @@
     }
     function showspin() {
       
-      if(document.getElementById("name").value!="")
+      if(document.getElementById("name").value!="" && document.getElementById("name").value.length <= 20)
       {
-        if(document.getElementById("desc").value!="")
+        if(document.getElementById("desc").value!="" && document.getElementById("desc").value.length <= 20)
         { 
-            if(document.getElementById("tags").value!="")
+            if(document.getElementById("tags").value!="" && document.getElementById("tags").value.length <= 30 )
             {
               if(document.getElementsByName("filename")[0].value != "")
               {
