@@ -119,9 +119,18 @@ def search(request):
             res = Adetails.objects.filter(
                 Q(name__icontains=name) | Q(tags__icontains=name)
             )
+            countdata = Adetails.objects.filter(
+                Q(name__icontains=name) | Q(tags__icontains=name)
+            ).count()
+            msg = ""
+            if(countdata==0):
+                msg="Can't find '"+ name +"'"
+            else:
+                msg="Found "+str(countdata) +" result for '"+name+"'"            
             context = {
                 'data': res,
-                'form': uf
+                'form': uf,
+                'typehint': msg,
             }
             #recent
             now = datetime.datetime.now()
@@ -148,7 +157,7 @@ def search(request):
         data = Adetails.objects.all()
         context = {
             'form': uf,
-            'typehint':"type something in search"
+            'typehint':"Type something in search."
         }
         #logs
         logging_ctx("Ichios Search - Access","User Accessed this page by this IP "
