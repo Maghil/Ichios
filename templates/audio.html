@@ -1,0 +1,59 @@
+
+         <audio id="myvid">
+            <source src="{{d.files.url}}" type="audio/mpeg">
+         </audio>
+         <div class="player">
+            <input type = "image" src="../static/images/play.png" id ="play"/>
+            <input type = "image" src="../static/images/pause.png" id ="pause"/>
+            <label id="timer">0:00</label><span id="timerspliter">&nbsp;/&nbsp;</span><label id="timerend">0:00</label>
+            <progress id="progress" value="0"></progress>
+            <input type="image" src="../static/images/volume.png"/><input id="volume" type="range" />
+            <a href="{{d.files.url}}" download="{{d.files}}"><input type="image" src="../static/images/download.png"></a>
+         </div>
+         <script>
+            var play=document.querySelector('#play');
+var pause=document.querySelector('#pause');
+var video=document.querySelector('audio');
+var progres=document.querySelector('#progress');
+var volume=document.querySelector("#volume");
+var timer=document.querySelector("#timer");
+var timerend=document.querySelector("#timerend");
+
+
+pause.style.display="none";
+play.addEventListener('click',playPause);
+pause.addEventListener('click',playPause);
+function playPause(){
+   if (video.paused){
+      video.play();
+      play.style.display="none";
+      pause.style.display="inline";
+   }
+   else{
+      video.pause();
+      pause.style.display="none";
+      play.style.display="inline";
+   }
+}
+
+video.addEventListener('timeupdate',function(){
+   progres.value=video.currentTime/video.duration;
+});
+volume.addEventListener('change',function(e){
+   video.volume=e.currentTarget.value/100;
+});
+
+const calculateTime = (secs) => {
+   const minutes = Math.floor(secs / 60);
+   const seconds = Math.floor(secs % 60);
+   const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+   return `${minutes}:${returnedSeconds}`;
+}
+video.addEventListener('timeupdate',function(){
+   timer.innerHTML=calculateTime(video.currentTime);
+});
+video.addEventListener('timeupdate',function(){
+   timerend.innerHTML=calculateTime(video.duration);
+});
+</script>
+     <!--<script src="../static/js/script.js"></script>-->
