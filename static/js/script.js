@@ -1,32 +1,32 @@
-var play=document.querySelector('#play');
-var pause=document.querySelector('#pause');
-var video=document.querySelector('audio');
-var progres=document.querySelector('#progress');
-var volume=document.querySelector("#volume");
-var timer=document.querySelector("#timer");
-var timerend=document.querySelector("#timerend");
+const play=document.querySelector('#play');
+const pause=document.querySelector('#pause');
+const video=document.querySelector('audio')[1];
+const progres=document.querySelector('#progress');
+const volume=document.querySelector("#volume");
+const timer=document.querySelector("#timer");
+const timerend=document.querySelector("#timerend");
 
 
 pause.style.display="none";
 play.addEventListener('click',playPause);
 pause.addEventListener('click',playPause);
 function playPause(){
-   if (video.paused){
-      video.play();
+   if (video[1].paused){
+      video[1].play();
       play.style.display="none";
       pause.style.display="inline";
    }
    else{
-      video.pause();
+      video[1].pause();
       pause.style.display="none";
       play.style.display="inline";
    }
 }
 
-video.addEventListener('timeupdate',function(this){
+video[1].addEventListener('timeupdate',()=>{
    progres.value=video.currentTime/video.duration;
 });
-volume.addEventListener('change',function(e){
+volume[1].addEventListener('change',function(e){
    video.volume=e.currentTarget.value/100;
 });
 
@@ -36,9 +36,9 @@ const calculateTime = (secs) => {
    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
    return `${minutes}:${returnedSeconds}`;
 }
-video.addEventListener('timeupdate',function(this){
+video[1].addEventListener('timeupdate',()=>{
    timer.innerHTML=calculateTime(video.currentTime);
 });
-video.addEventListener('timeupdate',function(this){
+video[1].addEventListener('timeupdate',()=>{
    timerend.innerHTML=calculateTime(video.duration);
 });
