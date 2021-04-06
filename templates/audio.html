@@ -1,13 +1,11 @@
-
-         <audio id="myvid">
-            <source src="{{d.files.url}}" type="audio/mpeg">
-         </audio>
-         <div class="player">
-            <input type = "image" src="../static/images/play.png" id ="play"/>
-            <input type = "image" src="../static/images/pause.png" id ="pause"/>
-            <label id="timer">0:00</label><span id="timerspliter">&nbsp;/&nbsp;</span><label id="timerend">0:00</label>
-            <progress id="progress" value="0"></progress>
-            <input type="image" src="../static/images/volume.png"/><input id="volume" type="range" />
-            <a href="{{d.files.url}}" download="{{d.files}}"><input type="image" src="../static/images/download.png"></a>
-         </div>
-      
+<audio id="myvid_{{d.hash_value}}">
+   <source src="{{d.files.url}}" type="audio/mpeg">
+</audio>
+<div class="player">
+   <input id="pl_{{d.hash_value}}"  type="image" src="../static/images/play.png" class="play" />
+   <input id="pa_{{d.hash_value}}"  type="image" src="../static/images/pause.png" class="pause" />
+   <label id="ti_{{d.hash_value}}">0:00</label><span id="timerspliter">&nbsp;/&nbsp;</span><label id="te_{{d.hash_value}}">0:00</label>
+   <progress id="pr_{{d.hash_value}}" value="0"></progress>
+   <input type="image" src="../static/images/volume.png" /><input id="vo_{{d.hash_value}}" type="range" />
+   <a href="{{d.files.url}}" download="{{d.files}}"><input type="image" src="../static/images/download.png"></a>
+</div>
