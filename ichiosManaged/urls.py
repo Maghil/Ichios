@@ -8,5 +8,6 @@ urlpatterns = [
    path('ichome/logout',views.logoutUser ,name='logout'),
    path('icrecent',views.recentdo ,name='icrecent'),
    path('iccontent',views.content ,name='iccontent'),
+   path('robots.txt',views.robots_txt),
    path('del/<str:hash_value>',views.delete_file)
 ]

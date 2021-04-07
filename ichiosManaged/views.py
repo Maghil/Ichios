@@ -7,6 +7,8 @@ from homepage.models import Adetails
 from django.contrib.auth.decorators import login_required
 from ichiosManaged.models import statistics_oneword,logs,recent
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.http import require_GET
 import datetime,os
 # Create your views here.
 def reg(request):
@@ -137,3 +139,11 @@ def delete_file(request,hash_value):
 def logging_ctx(title,description):
      now = datetime.datetime.now()
      logs(l_loc=title,L_Description=description,l_datetime=now.strftime('%H:%M:%S on %A, %B the %dth, %Y')).save()
+
+@require_GET
+def robots_txt(request):
+    lines = [
+        "User-Agent: *",
+        "Disallow: *",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
