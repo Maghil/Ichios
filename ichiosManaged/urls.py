@@ -9,6 +9,5 @@ urlpatterns = [
    path('icrecent',views.recentdo ,name='icrecent'),
    path('icreports',views.ireports ,name='icreports'),
    path('iccontent',views.content ,name='iccontent'),
-   path('robots.txt',views.robots_txt),
    path('del/<str:hash_value>',views.delete_file)
 ]
