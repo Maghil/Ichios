@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from homepage.models import Adetails
 from django.contrib.auth.decorators import login_required
-from ichiosManaged.models import statistics_oneword,logs,recent
+from ichiosManaged.models import statistics_oneword,logs,recent,reports
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_GET
@@ -147,3 +147,16 @@ def robots_txt(request):
         "Disallow: *",
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
+def ireports(request):
+    data = reports.objects.all().order_by('-id')
+    context = {
+        'rept':data
+    }
+    return render(request,"reports.html",context)
+
+def report_save(ttl,action,data):
+     today = datetime.datetime.now().date()
+     now = datetime.datetime.now()
+     current_time = now.strftime("%H:%M:%S")
+     reports(title=ttl,action=action,datetxt=today,timetxt=current_time,data=data).save()

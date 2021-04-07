@@ -18,3 +18,10 @@ class recent(models.Model):
     timetxt =models.TextField()
     name = models.TextField()
     filepath = models.TextField()
+
+class reports(models.Model):
+    title = models.TextField()
+    action =models.TextField()
+    datetxt = models.TextField()
+    timetxt =models.TextField()
+    data = models.TextField()

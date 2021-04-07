@@ -31,29 +31,32 @@
 			</div>
 			<a href="{% url 'ichome' %}"><i class="fa fa-area-chart"></i> OverView</a>
 			<a href="{% url 'icrecent' %}"><i class="fa fa-fw fa-history"></i> Recent</a>
-			<a  href="{% url 'icreports' %}"><i class="fa fa-flag"></i> Reports</a>
-			<a class="activeslide" href="{% url 'iclogs' %}"><i class="fa fa-file-text"></i> Logs</a>
+			<a class="activeslide"  href="{% url 'icreports' %}"><i class="fa fa-flag"></i> Reports</a>
+			<a href="{% url 'iclogs' %}"><i class="fa fa-file-text"></i> Logs</a>
 			<a href="{% url 'iccontent' %}"><i class="fa fa-file"></i> Content</a>
 			<a style="display: none;" href="#"><i class="fa fa-user-secret"></i> Settings</a>
 		</div>
-		<div class="maincontent">
+		<div style="width: 1350px;" class="maincontent">
 
 
-			<h3 style="color:#555;">Log's</h3>
+			<h3 style="color:#555;">Report's</h3>
 			<table>
-
 				<tr>
 					<th>#</th>
-					<th>Log Type</th>
-					<th>Description</th>
-					<th>On</th>
+					<th>Report</th>
+					<th>Action</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Data</th>
 				</tr>
-				{% for d in logs %}
+				{% for d in rept %}
 				<tr>
 					<td>{{forloop.counter}}</td>
-					<td>{{d.l_loc}}</td>
-					<td>{{d.L_Description}}</td>
-					<td>{{d.l_datetime}}</td>
+					<td>{{d.title}}</td>
+					<td>{{d.action}}</td>
+					<td>{{d.datetxt}}</td>
+					<td>{{d.timetxt}}</td>
+					<td>{{d.data}}</td>
 				</tr>
 				{% endfor %}
 			</table>
