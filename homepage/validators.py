@@ -4,6 +4,7 @@ import json
 from ibm_watson import SpeechToTextV1
 from ibm_watson.websocket import RecognizeCallback, AudioSource
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ichiosManaged.views import report_save
 import re
 import time
 import os
@@ -38,11 +39,13 @@ def checkAudio(filename):
                                     word_confidence=True,
                                     model='en-US_NarrowbandModel').get_result(), indent=2))
     except:
+        report_save(ttl="Corrupted File",action="The File was removed due to invalid format or file corrupted",data=filename)
         return(False)
     str = ""    
     while bool(dic.get('results')):
         str = dic.get('results').pop().get('alternatives').pop().get('transcript')+str[:]  
     if(re.search("\*+",str)):
+        report_save(ttl="Explicit File",action="The File was removed due to Explicit Content",data=filename)
         return False
     else:
         return True
@@ -52,5 +55,6 @@ def checkType(filename):
         info = fleep.get(file.read(128))
         if info.extension[0] == 'wav':
             return True
-        else: 
+        else:
+            report_save(ttl="Corrupted File",action="The File was removed due to invalid format or file corrupted",data=filename) 
             return False
