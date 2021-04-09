@@ -13,6 +13,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="{% static '/css/dialog.css' %}">
+  
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
   <title>Ichios</title>
   <style>
@@ -183,44 +185,6 @@
       }
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      padding-top: 100px;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .modal-content {
-      margin: auto;
-      background-color: #fefefe;
-      border: 1px solid #888;
-      width: 50%;
-    }
-
-    .mhead {
-      padding-left: 20px;
-    }
-
-    .mbody {
-      margin-top: 10px;
-      padding-left: 25px;
-    }
-
-    .mheadttl {
-      color: rgb(105, 72, 255);
-    }
-
-    .mbodyctx {
-      color: #555;
-      font-size: 27px;
-    }
   </style>
 </head>
 
@@ -256,54 +220,27 @@
       </div>
     </div>
   </div>
+<script>
+  $(document).ready(function () {
+    $('#reportform').submit(function () { 
+              $.ajax({
+                  data: $(this).serialize(), 
+                  type: $(this).attr('method'), 
+                  url: "{% url 'report' %}",
+                  success: function (response) {
+                      cancelbt();
+                      alert(response.name);
+                  },
+                  error: function (response) {
+                     // alert(response.responseJSON.errors);
+                      console.log(response.responseJSON.errors)
+                  }
+              });
+              return false;
+          });
+  })
 
-  <script>
-
-    var span = document.getElementsByClassName("close")[0];
-    function showmdl(val) {
-      var str = val;
-      file = str.substring(3, str.length);
-      name = document.getElementById("tt_" + file).innerHTML;
-      document.getElementById("retxt").value = "";
-      document.getElementById("nmtxt").value = name;
-      document.getElementById("hvtxt").value = file;
-      var modal = document.getElementById("myModal");
-      modal.style.display = "block";
-    }
-    span.onclick = function () {
-      cancelbt();
-    }
-    function cancelbt() {
-      var modal = document.getElementById("myModal");
-      modal.style.display = "none";
-    }
-    window.onclick = function (event) {
-      var modal = document.getElementById("myModal");
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-
-  </script>
-  <script>
-    $(document).ready(function () {
-      $('#reportform').submit(function () {
-        $.ajax({
-          data: $(this).serialize(),
-          type: $(this).attr('method'),
-          url: "{% url 'report' %}",
-          success: function (response) {
-            cancelbt();
-            alert(response.name);
-          },
-          error: function (response) {
-            // alert(response.responseJSON.errors);
-            console.log(response.responseJSON.errors)
-          }
-        });
-        return false;
-      });
-    })
-  </script>
+</script>
+  <script  src="{% static '/js/report.js'%}"></script>
 </body>
 </html>

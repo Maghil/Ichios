@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from homepage.models import Adetails,Report_song
+from homepage.models import Adetails,Report_sound
 from ichiosManaged.models import statistics_oneword,logs,recent
 from ichiosManaged.views import logging_ctx
 from datetime import datetime
@@ -179,13 +179,13 @@ def get_Report(request):
             hash_val= form.cleaned_data['hval']
             s_name = form.cleaned_data['name']
             reason = form.cleaned_data['reason']
-            report_Count= Report_song.objects.filter(hash_val=hash_val,ip=ip).count()
+            report_Count= Report_sound.objects.filter(hash_val=hash_val,ip=ip).count()
             if(report_Count==0):
                 if(Adetails.objects.filter(hash_value=hash_val).exists()):
                     Adetails.objects.filter(hash_value=hash_val,name=s_name).update(Report_vote=F('Report_vote')+1)
                     now = datetime.datetime.now()
                     date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
-                    Report_song(ip=ip,reason=reason,name=s_name,datetime=date_time,hash_val=hash_val).save()
+                    Report_sound(ip=ip,reason=reason,name=s_name,datetime=date_time,hash_val=hash_val).save()
                     return JsonResponse({"name": "Reported successfully."}, status=200)
                 else:
                     return JsonResponse({"name": "Reported media was not found...!"}, status=200)

@@ -27,7 +27,7 @@ class Adetails(models.Model):
         super(Adetails,self).save(*args, **kwargs)
 
 
-class Report_song(models.Model):
+class Report_sound(models.Model):
     ip = models.TextField(default="")
     reason = models.TextField(default="")
     name = models.CharField(max_length=10,null=False)
