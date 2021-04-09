@@ -3,7 +3,7 @@ from ichiosManaged.forms import RegForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
-from homepage.models import Adetails
+from homepage.models import Adetails,Report_song
 from django.contrib.auth.decorators import login_required
 from ichiosManaged.models import statistics_oneword,logs,recent,reports
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -132,6 +132,8 @@ def get_client_ip(request):
     return str(ip)
 
 def delete_file(request,hash_value):
+    rdel = Report_song.objects.get(hash_val=hash_value)
+    rdel.delete()
     data_to_del = Adetails.objects.get(hash_value=hash_value)
     data_to_del.delete()  
     return redirect(content)
@@ -150,8 +152,10 @@ def robots_txt(request):
 
 def ireports(request):
     data = reports.objects.all().order_by('-id')
+    report = Report_song.objects.all().order_by('-id')
     context = {
-        'rept':data
+        'rept':data,
+        'userReport':report,
     }
     return render(request,"reports.html",context)
 

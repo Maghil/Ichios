@@ -1,39 +1,41 @@
 {% load static %}
 {% load filter_tags %}
 <div id="Load-Page">
-    <div class="container">
-      <div class="row">
-        <center><h3 style="color: #555;">{{typehint}}</h3></center>
-        {% for d in data %}
-        <div
-          class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
-          <div class="card">
-            <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
-            <div class="container">
-              <div>
-                <h3 style="margin-top: 5px;">{{d.name}}</h3>
-              </div>
-              <div>
-                <h7>{{d.description}}</h7>
-              </div>
-              <div class="tags-outer">
-                <h7><i>
-                    {% with d.tags|split:" " as tags %}
-                    {% for tag in tags %}
-                    <div class="tags">{{tag}}</div>
-                    {% endfor %}
-                    {% endwith %}
-                  </i></h7>
-              </div>
-              <div class="flex-row">
-                <div class="audio-div">
-                  {% include 'audio.html' %}
-                </div> 
+  <div class="container">
+    <div class="row">
+      <center><h3 style="color: #555;">{{typehint}}</h3></center>
+      {% for d in data %}
+      <div
+        class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
+        <div class="card">
+          <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
+          <div class="container">
+            <div>
+              <h3 id="tt_{{d.hash_value}}" style="margin-top: 5px;">{{d.name}}</h3>
+            </div>
+            <div>
+              <h7>{{d.description}}</h7>
+            </div>
+            <div class="tags-outer">
+              <h7><i>
+                  {% with d.tags|split:" " as tags %}
+                  {% for tag in tags %}
+                  <div class="tags">{{tag}}</div>
+                  {% endfor %}
+                  {% endwith %}
+                </i></h7>
+            </div>
+            <div class="flex-row">
+              <div class="audio-div">
+                {% include "audio.html" %}
+                <p id="md_{{d.hash_value}}" onclick="showmdl(this.id)"
+                  style="color: rgb(255, 83, 83); cursor: pointer;"><i class="fa fa-flag"></i>&nbsp;Report</p>
               </div>
             </div>
           </div>
         </div>
-        {% endfor %}
       </div>
+      {% endfor %}
     </div>
   </div>
+</div>

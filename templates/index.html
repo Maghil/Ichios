@@ -12,6 +12,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
   <title>Ichios</title>
   <style>
@@ -181,21 +182,128 @@
         transition: 0.5s;
       }
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      padding-top: 100px;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      margin: auto;
+      background-color: #fefefe;
+      border: 1px solid #888;
+      width: 50%;
+    }
+
+    .mhead {
+      padding-left: 20px;
+    }
+
+    .mbody {
+      margin-top: 10px;
+      padding-left: 25px;
+    }
+
+    .mheadttl {
+      color: rgb(105, 72, 255);
+    }
+
+    .mbodyctx {
+      color: #555;
+      font-size: 27px;
+    }
   </style>
 </head>
 
 <body>
   <div class="flexer flex-col">
-
     <div class="topnav">
       <a href="{% url 'index' %}"><b>Home</b></a>
       <a href="{% url 'upload' %}">Upload</a>
       <a href="{% url 'search' %}">Search</a>
     </div>
-
     {% include 'sound.html' %}
     {% include 'footer.html' %}
-  </div>
-</body>
 
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close"></span>
+        <div class="mhead"><br>
+          <h3 class="mheadttl"><i class="fa fa-flag"></i>&nbsp;Report Media</h3>
+        </div>
+        <div class="mbody">
+          <p>Are you sure you want to report this file</p>
+          <h4>Reason for the report</h4>
+          <form method="POST" id="reportform">{% csrf_token %}
+            {{form.hval}}
+            {{form.name}}
+            {{form.reason}}
+        </div>
+        <div style="margin-left: 25px; margin-top: 15px; margin-bottom: 20px;">
+          <button type="submit" class="btn btn-primary">Send Report</button>
+          <button type="button" class="btn btn-danger" onclick="cancelbt();">Cancel</button><br>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var span = document.getElementsByClassName("close")[0];
+    function showmdl(val) {
+      var str = val;
+      file = str.substring(3, str.length);
+      name = document.getElementById("tt_" + file).innerHTML;
+      document.getElementById("retxt").value = "";
+      document.getElementById("nmtxt").value = name;
+      document.getElementById("hvtxt").value = file;
+      var modal = document.getElementById("myModal");
+      modal.style.display = "block";
+    }
+    span.onclick = function () {
+      cancelbt();
+    }
+    function cancelbt() {
+      var modal = document.getElementById("myModal");
+      modal.style.display = "none";
+    }
+    window.onclick = function (event) {
+      var modal = document.getElementById("myModal");
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('#reportform').submit(function () {
+        $.ajax({
+          data: $(this).serialize(),
+          type: $(this).attr('method'),
+          url: "{% url 'report' %}",
+          success: function (response) {
+            cancelbt();
+            alert(response.name);
+          },
+          error: function (response) {
+            // alert(response.responseJSON.errors);
+            console.log(response.responseJSON.errors)
+          }
+        });
+        return false;
+      });
+    })
+  </script>
+</body>
 </html>

@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from homepage.forms import UploadForm, SearchForm
+from homepage.forms import UploadForm, SearchForm,report_form
 from django.http import JsonResponse
 from django.contrib import messages
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from homepage.models import Adetails
+from homepage.models import Adetails,Report_song
 from ichiosManaged.models import statistics_oneword,logs,recent
 from ichiosManaged.views import logging_ctx
 from datetime import datetime
@@ -17,23 +17,23 @@ from .validators import validateSoundAssets
 from django.shortcuts import get_object_or_404, render
 
 def index(request):
-    data = Adetails.objects.all()
-    context = {
-        'data': data
+        data = Adetails.objects.all()
+        context = {
+        'data': data,
+        'form':report_form()
     }
-    ## stats for visit
-    if statistics_oneword.objects.filter(id=1).exists():
-        statistics_oneword(id=1,visiters=F('visiters')+1,reports=F('reports'),upload=F('upload'),logs=F('logs')).save()
-    else:
-        statistics_oneword(visiters=1).save()
-    ##End
+        ## stats for visit
+        if statistics_oneword.objects.filter(id=1).exists():
+            statistics_oneword(id=1,visiters=F('visiters')+1,reports=F('reports'),upload=F('upload'),logs=F('logs')).save()
+        else:
+            statistics_oneword(visiters=1).save()
+        ##End
 
-    #logs
-    logging_ctx("Ichios - Request","User accessing the site by this IP "
-    + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
-    #End logs
-
-    return render(request, 'index.html', context)
+        #logs
+        logging_ctx("Ichios - Request","User accessing the site by this IP "
+        + get_client_ip(request)+" ,UserAgent - "+request.META['HTTP_USER_AGENT'])
+        #End logs
+        return render(request, 'index.html', context)
 
 def upload(request):
     if request.method == "POST":
@@ -130,6 +130,7 @@ def search(request):
             context = {
                 'data': res,
                 'form': uf,
+                'rform':report_form(),
                 'typehint': msg,
             }
             #recent
@@ -157,6 +158,7 @@ def search(request):
         data = Adetails.objects.all()
         context = {
             'form': uf,
+            'rform':report_form(),
             'typehint':"Type something in search."
         }
         #logs
@@ -168,6 +170,32 @@ def search(request):
 def sound_asset(request, slug):   
     data = Adetails.objects.filter(slug=slug)
     return render(request, 'index.html', {'data': data})
+    
+def get_Report(request):
+    if request.method == "POST" and request.is_ajax():
+        form = report_form(request.POST)
+        if form.is_valid():
+            ip = get_client_ip(request)
+            hash_val= form.cleaned_data['hval']
+            s_name = form.cleaned_data['name']
+            reason = form.cleaned_data['reason']
+            report_Count= Report_song.objects.filter(hash_val=hash_val,ip=ip).count()
+            if(report_Count==0):
+                if(Adetails.objects.filter(hash_value=hash_val).exists()):
+                    Adetails.objects.filter(hash_value=hash_val,name=s_name).update(Report_vote=F('Report_vote')+1)
+                    now = datetime.datetime.now()
+                    date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+                    Report_song(ip=ip,reason=reason,name=s_name,datetime=date_time,hash_val=hash_val).save()
+                    return JsonResponse({"name": "Reported successfully."}, status=200)
+                else:
+                    return JsonResponse({"name": "Reported media was not found...!"}, status=200)
+            else:
+                return JsonResponse({"name": "You have already reported this media..!"}, status=200)
+        else:
+            errors = form.errors.as_json()
+            return JsonResponse({"errors": errors}, status=400)
+
+    return render(request, context)
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

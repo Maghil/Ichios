@@ -5,4 +5,5 @@ urlpatterns = [
    path('upload/',views.upload ,name='upload'),
    path('search/',views.search ,name='search'),
    path('assets/<slug:slug>/', views.sound_asset),
+   path('report/' ,views.get_Report,name='report'),
 ]

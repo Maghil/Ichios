@@ -39,7 +39,7 @@
 		<div style="width: 1350px;" class="maincontent">
 
 
-			<h3 style="color:#555;">Report's</h3>
+			<h3 style="color:#555;">System Report's</h3>
 			<table>
 				<tr>
 					<th>#</th>
@@ -57,6 +57,26 @@
 					<td>{{d.datetxt}}</td>
 					<td>{{d.timetxt}}</td>
 					<td>{{d.data}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			<br>
+			<h3 style="color:#555;">User Report's</h3>
+			<table>
+				<tr>
+					<th>#</th>
+					<th>Ip</th>
+					<th>Name</th>
+					<th>Reason</th>
+					<th>Reported on</th>
+				</tr>
+				{% for d in userReport %}
+				<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{d.ip}}</td>
+					<td>{{d.name}}</td>
+					<td>{{d.reason}}</td>
+					<td>{{d.datetime}}</td>
 				</tr>
 				{% endfor %}
 			</table>
