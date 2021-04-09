@@ -1,26 +1,36 @@
+
 .player{
    background-color: rgb(223, 223, 230);
    width: 100%;
-   padding: 2px;
+   min-width: 350px;
+   padding-top: 4px;
    border-radius: 15px;
    margin-bottom: 2%;
 }
 progress{
-   height: 20px;
-   width: 30%;
-   margin-top: 0;
+   height: 10px;
+   width: 25%;
 }
-#volume{
+.volume{
    width: 20%;
 }
 input[type="image"]
 {
-   height:18px;
+   height:15px;
    margin-left:10px;
    margin-right:2px;
-   margin-top:2px;
 }
-#timer,#timerend,#timerspliter{
+input[type="range"]
+{
+   height:10px;
+   margin-left:10px;
+   margin-right:2px;
+}
+.play,.pause{
+   height: 12px !important;
+}
+
+.timer,.timerend,.timerspliter{
    font-weight: bold;
-   font-size: 15px;
+   font-size: 14px;
 }

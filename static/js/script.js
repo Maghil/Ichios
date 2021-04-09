@@ -35,11 +35,6 @@ function playPause(e) {
       video.play();
       play.style.display = "none";
       pause.style.display = "inline";
-      var a = calculateTime(video.currentTime);
-      var b = calculateTime(video.duration);
-      if (a == b) {
-         alert(a);
-      }
    }
    else {
       video.pause();
