@@ -9,7 +9,6 @@ for (var i = 0; i < butts.length; i++) {
    butts[i].addEventListener("click", playPause);
 }
 
-
 function playPause(e) {
    e = e || window.event;
    e = e.target || e.srcElement;
@@ -48,3 +47,11 @@ const calculateTime = (secs) => {
    const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
    return `${minutes}:${returnedSeconds}`;
 }
+window.addEventListener("play", function(evt)
+{
+    if(window.$_currentlyPlaying && window.$_currentlyPlaying != evt.target)
+    {
+        window.$_currentlyPlaying.pause();
+    } 
+    window.$_currentlyPlaying = evt.target;
+}, true);
