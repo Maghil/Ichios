@@ -1,0 +1,42 @@
+{% load static %}
+{% load filter_tags %}
+<div id="Load-Page">
+    <div class="container">
+      <div class="row">
+        <center><h3 style="color: #555;">{{typehint}}</h3></center>
+        {% for d in data %}
+        <div
+          class="col sg-col-4-of-24 sg-col-4-of-12 sg-col-4-of-36 s-result-item s-asin sg-col-4-of-28 sg-col-4-of-16 sg-col sg-col-4-of-20 sg-col-4-of-32">
+          <div class="card">
+            <img src="{% static 'images/ic.webp' %}" alt="Avatar" style="width:100%">
+            <div class="container">
+              <div>
+                <h3 style="margin-top: 5px;">{{d.name}}</h3>
+              </div>
+              <div>
+                <h7>{{d.description}}</h7>
+              </div>
+              <div class="tags-outer">
+                <h7><i>
+                    {% with d.tags|split:" " as tags %}
+                    {% for tag in tags %}
+                    <div class="tags">{{tag}}</div>
+                    {% endfor %}
+                    {% endwith %}
+                  </i></h7>
+              </div>
+              <div class="flex-row">
+                <div class="audio-div">
+                  <audio controls controlsList="nodownload">  <source src="{{d.files.url}}" type="audio/mpeg"> </audio>
+                </div>
+                <div>
+                  <a class="dwn" href="{{d.files.url}}" download="{{d.files}}"><i class="fa fa-download"></i></a>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>

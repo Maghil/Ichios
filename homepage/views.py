@@ -14,7 +14,7 @@ from django.conf import settings
 import hashlib,datetime
 import os
 from .validators import validateSoundAssets
-
+from django.shortcuts import get_object_or_404, render
 
 def index(request):
     data = Adetails.objects.all()
@@ -165,6 +165,9 @@ def search(request):
         #End logs
         return render(request, 'search.html', context)
 
+def sound_asset(request, slug):   
+    data = Adetails.objects.filter(slug=slug)
+    return render(request, 'index.html', {'data': data})
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')

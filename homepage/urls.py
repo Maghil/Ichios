@@ -3,5 +3,6 @@ from . import views
 urlpatterns = [
    path('',views.index , name="index"),
    path('upload/',views.upload ,name='upload'),
-   path('search/',views.search ,name='search')
+   path('search/',views.search ,name='search'),
+   path('assets/<slug:slug>/', views.sound_asset),
 ]
