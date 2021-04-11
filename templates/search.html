@@ -104,18 +104,20 @@
       color: black;
     }
 
-    .flex-row, .flexer, .flex-col{
+    .flex-row,
+    .flexer,
+    .flex-col {
       display: flex;
     }
 
-    .flex-col{
+    .flex-col {
       flex-direction: column;
     }
 
-    .flex-row{
+    .flex-row {
       flex-direction: row;
     }
-    
+
     .flexer {
       width: 100%;
     }
@@ -187,20 +189,16 @@
       align-items: center;
     }
 
-    /* audio{
-      width: 100%;
-    } */
-
-    .audio-div{
+    .audio-div {
       flex-grow: 1;
     }
 
-    .tags-outer{
-      margin:5px 00px 8px 0px;
+    .tags-outer {
+      margin: 5px 00px 8px 0px;
       font-size: 14px;
     }
 
-    .tags{
+    .tags {
       color: white;
       border-radius: 5px;
       background-color: #00000060;
@@ -242,43 +240,9 @@
     </div>
 
     {% include 'sound.html' %}
-
-    <footer class="bg-dark text-justify text-white">
-      <div class="container row">
-        <div class="col">
-          <section class="mb-4">
-            <b style="font-size: 25px;">Ichios</b>
-            <p>
-              Ichios is a web application that allows users to upload sound clips online.
-              This helps artists to reuse sound assets which are uploaded by people all over the world.
-              Ichios also maintains user profile so users can maintain their uploaded assets even
-              after uploading.
-            </p>
-          </section>
-        </div>
-        <div class="col text-center text-white">
-          <div class="container p-4">
-            <section class="mb-4">
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-facebook-f"></i></a>
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-google"></i></a>
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-instagram"></i></a>
-              <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
-                  class="fab fa-linkedin-in"></i></a>
-            </section>
-          </div>
-        </div>
-      </div>
-      <div class="text-center p-3" style="background-color: rgba(116, 116, 116, 0.685);">
-        © 2020 Copyright:
-        <a class="text-white" href="https://www.google.com/">ichos.com</a>
-      </div>
-    </footer>
-
+    {% include 'footer.html' %}
   </div>
-
+  
 </body>
 
 </html>
