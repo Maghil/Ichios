@@ -132,7 +132,7 @@ def get_client_ip(request):
     return str(ip)
 
 def delete_file(request,hash_value):
-    rdel = Report_sound.objects.get(hash_val=hash_value)
+    rdel = Report_sound.objects.get(hash_value=hash_value)
     rdel.delete()
     data_to_del = Adetails.objects.get(hash_value=hash_value)
     data_to_del.delete()  

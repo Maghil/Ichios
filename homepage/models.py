@@ -32,4 +32,4 @@ class Report_sound(models.Model):
     reason = models.TextField(default="")
     name = models.CharField(max_length=10,null=False)
     datetime = models.TextField(default="")
-    hash_val = models.TextField(default="")
+    hash_value = models.TextField(default="")

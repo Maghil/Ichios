@@ -14,7 +14,7 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static '/css/dialog.css' %}">
-  
+
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
   <title>Ichios</title>
   <style>
@@ -184,7 +184,6 @@
         transition: 0.5s;
       }
     }
-
   </style>
 </head>
 
@@ -208,7 +207,7 @@
           <p>Are you sure you want to report this file</p>
           <h4>Reason for the report</h4>
           <form method="POST" id="reportform">{% csrf_token %}
-            {{form.hval}}
+            {{form.hash_value}}
             {{form.name}}
             {{form.reason}}
         </div>
@@ -220,27 +219,28 @@
       </div>
     </div>
   </div>
-<script>
-  $(document).ready(function () {
-    $('#reportform').submit(function () { 
-              $.ajax({
-                  data: $(this).serialize(), 
-                  type: $(this).attr('method'), 
-                  url: "{% url 'report' %}",
-                  success: function (response) {
-                      cancelbt();
-                      alert(response.name);
-                  },
-                  error: function (response) {
-                     // alert(response.responseJSON.errors);
-                      console.log(response.responseJSON.errors)
-                  }
-              });
-              return false;
-          });
-  })
+  <script>
+    $(document).ready(function () {
+      $('#reportform').submit(function () {
+        $.ajax({
+          data: $(this).serialize(),
+          type: $(this).attr('method'),
+          url: "{% url 'report' %}",
+          success: function (response) {
+            cancelbt();
+            alert(response.name);
+          },
+          error: function (response) {
+            // alert(response.responseJSON.errors);
+            console.log(response.responseJSON.errors)
+          }
+        });
+        return false;
+      });
+    })
 
-</script>
-  <script  src="{% static '/js/report.js'%}"></script>
+  </script>
+  <script src="{% static '/js/report.js'%}"></script>
 </body>
+
 </html>

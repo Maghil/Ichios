@@ -225,7 +225,6 @@
         transition: 0.5s;
       }
     }
-
   </style>
 </head>
 
@@ -254,7 +253,7 @@
           <p>Are you sure you want to report this file</p>
           <h4>Reason for the report</h4>
           <form method="POST" id="reportform">{% csrf_token %}
-            {{rform.hval}}
+            {{rform.hash_value}}
             {{rform.name}}
             {{rform.reason}}
         </div>
@@ -286,7 +285,7 @@
       });
     })
   </script>
-  <script  src="{% static '/js/report.js'%}"></script>
+  <script src="{% static '/js/report.js'%}"></script>
 </body>
 
 </html>
