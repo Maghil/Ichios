@@ -55,7 +55,8 @@
 			<th>Name Given</th>
 			<th>Description</th>
 			<th>Tags</th>
-            <th>filename</th>
+            <th>Filename</th>
+            <th>User Reports</th>
             <th>Action</th>
 		</tr>
         {% for d in data %}
@@ -65,6 +66,7 @@
 			<td>{{d.description}}</td>
 			<td>{{d.tags}}</td>
             <td><a class="linkcl" href="{{d.files.url}}">{{d.files}}</a></td>
+            <td>{{d.Report_vote}}</td>
             <td><a href="del/{{d.hash_value}}"><i  class="delic fa fa-trash" aria-hidden="true"></i>
             </a></td>
 		</tr>

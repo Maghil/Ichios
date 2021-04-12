@@ -10,7 +10,9 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static '/css/dialog.css' %}">
   <title>Search</title>
   <link rel="icon" href="{% static 'images/ichios.png' %}" type="image/icon type">
   <link rel="stylesheet" href="{% static 'css/audio.css'%}">
@@ -241,7 +243,49 @@
 
     {% include 'sound.html' %}
     {% include 'footer.html' %}
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close"></span>
+        <div class="mhead"><br>
+          <h3 class="mheadttl"><i class="fa fa-flag"></i>&nbsp;Report Media</h3>
+        </div>
+        <div class="mbody">
+          <p>Are you sure you want to report this file</p>
+          <h4>Reason for the report</h4>
+          <form method="POST" id="reportform">{% csrf_token %}
+            {{rform.hash_value}}
+            {{rform.name}}
+            {{rform.reason}}
+        </div>
+        <div style="margin-left: 25px; margin-top: 15px; margin-bottom: 20px;">
+          <button type="submit" class="btn btn-primary">Send Report</button>
+          <button type="button" class="btn btn-danger" onclick="cancelbt();">Cancel</button><br>
+        </div>
+        </form>
+      </div>
+    </div>
   </div>
+  <script>
+    $(document).ready(function () {
+      $('#reportform').submit(function () {
+        $.ajax({
+          data: $(this).serialize(),
+          type: $(this).attr('method'),
+          url: "{% url 'report' %}",
+          success: function (response) {
+            cancelbt();
+            alert(response.name);
+          },
+          error: function (response) {
+            // alert(response.responseJSON.errors);
+            console.log(response.responseJSON.errors)
+          }
+        });
+        return false;
+      });
+    })
+  </script>
+  <script src="{% static '/js/report.js'%}"></script>
 </body>
 
 </html>

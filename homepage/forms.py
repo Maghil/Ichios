@@ -9,3 +9,8 @@ class UploadForm(forms.Form):
 
 class SearchForm(forms.Form):
    search = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Search for Name or Tags '}))
+
+class report_form(forms.Form):
+   hash_value = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Report','id':'hvtxt','style':'display:none; '}))
+   name = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Report','id':'nmtxt','style':'display:none; '}))
+   reason = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Enter Report reason here...!','id':'retxt','style':'width:50%;'}))

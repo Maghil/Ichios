@@ -9,7 +9,8 @@ class Adetails(models.Model):
     hash_value = models.CharField(default=False,max_length=50,null=False)
     files = models.FileField(upload_to='')
     slug = models.SlugField(max_length=50)
-
+    Report_vote = models.IntegerField(default=0)
+    
     def get_unique_slug(self):
     # In this method a unique slug is created
         slug = slugify(self.name)
@@ -24,3 +25,11 @@ class Adetails(models.Model):
         if not self.slug:
             self.slug = self.get_unique_slug()
         super(Adetails,self).save(*args, **kwargs)
+
+
+class Report_sound(models.Model):
+    ip = models.TextField(default="")
+    reason = models.TextField(default="")
+    name = models.CharField(max_length=10,null=False)
+    datetime = models.TextField(default="")
+    hash_value = models.TextField(default="")
