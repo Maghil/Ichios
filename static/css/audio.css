@@ -1,0 +1,36 @@
+
+.player{
+   background-color: rgb(223, 223, 230);
+   width: 100%;
+   min-width: 350px;
+   padding-top: 4px;
+   border-radius: 15px;
+   margin-bottom: 2%;
+}
+progress{
+   height: 10px;
+   width: 25%;
+}
+.volume{
+   width: 20%;
+}
+input[type="image"]
+{
+   height:15px;
+   margin-left:10px;
+   margin-right:2px;
+}
+input[type="range"]
+{
+   height:10px;
+   margin-left:10px;
+   margin-right:2px;
+}
+.play,.pause{
+   height: 12px !important;
+}
+
+.timer,.timerend,.timerspliter{
+   font-weight: bold;
+   font-size: 14px;
+}

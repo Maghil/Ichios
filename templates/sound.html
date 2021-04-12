@@ -27,11 +27,8 @@
               </div>
               <div class="flex-row">
                 <div class="audio-div">
-                  <audio controls controlsList="nodownload">  <source src="{{d.files.url}}" type="audio/mpeg"> </audio>
-                </div>
-                <div>
-                  <a class="dwn" href="{{d.files.url}}" download="{{d.files}}"><i class="fa fa-download"></i></a>
-                </div>  
+                  {% include 'audio.html' %}
+                </div> 
               </div>
             </div>
           </div>
