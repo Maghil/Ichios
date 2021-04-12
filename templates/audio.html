@@ -1,11 +1,12 @@
+{% load static %}
 <audio id="myvid_{{d.hash_value}}">
    <source src="{{d.files.url}}" type="audio/mpeg">
 </audio>
 <div class="player">
-   <input id="pl_{{d.hash_value}}"  type="image" src="../static/images/play.png" class="play" />
-   <input id="pa_{{d.hash_value}}"  type="image" src="../static/images/pause.png" class="pause" />
+   <input id="pl_{{d.hash_value}}"  type="image" src="{% static 'images/play.png' %}" class="play" />
+   <input id="pa_{{d.hash_value}}"  type="image" src="{% static 'images/pause.png' %}" class="pause" />
    <label id="ti_{{d.hash_value}}" class="timer">0:00</label><span class="timerspliter">&nbsp;/&nbsp;</span><label id="te_{{d.hash_value}}" class="timerend">0:00</label>
    <progress id="pr_{{d.hash_value}}" value="0"></progress>
-   <input type="image" src="../static/images/volume.png" /><input class="volume" id="vo_{{d.hash_value}}" type="range" />
-   <a href="{{d.files.url}}" download="{{d.files}}"><input type="image" src="../static/images/download.png"></a>
+   <input type="image" src="{% static 'images/volume.png' %}" /><input class="volume" id="vo_{{d.hash_value}}" type="range" />
+   <a href="{{d.files.url}}" download="{{d.files}}"><input type="image" src="{% static 'images/download.png' %}"></a>
 </div>
