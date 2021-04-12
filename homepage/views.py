@@ -169,7 +169,7 @@ def search(request):
 
 def sound_asset(request, slug):   
     data = Adetails.objects.filter(slug=slug)
-    return render(request, 'index.html', {'data': data})
+    return render(request, 'index.html', {'data': data,'form':report_form()})
     
 def get_Report(request):
     if request.method == "POST" and request.is_ajax():
