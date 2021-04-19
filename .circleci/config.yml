@@ -16,7 +16,7 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python3 mangae.py test
+      - python manage.py test
 
 workflows:
   main:
