@@ -11,6 +11,12 @@ jobs:
       - python/load-cache
       - python/install-deps
       - python/save-cache
+    
+  test:
+    executor: python/default
+    steps:
+      - checkout
+      - python mangae.py test
 
 workflows:
   main:
