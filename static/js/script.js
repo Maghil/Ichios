@@ -8,7 +8,6 @@ for (var i = 0; i < butts.length; i++) {
    butts[i].style.display = "none";
    butts[i].addEventListener("click", playPause);
 }
-
 function playPause(e) {
    e = e || window.event;
    e = e.target || e.srcElement;
@@ -52,6 +51,13 @@ window.addEventListener("play", function(evt)
     if(window.$_currentlyPlaying && window.$_currentlyPlaying != evt.target)
     {
         window.$_currentlyPlaying.pause();
+        evt.target=calculateTime(evt.target.currentTime=0);
+        player_set=window.$_currentlyPlaying.id;
+        newStr= player_set.replace('myvid_', '');
+        document.getElementById('pl_'+newStr).style.display="inline";
+        document.getElementById('pa_'+newStr).style.display="none";
+        document.getElementById('pr_'+newStr).value=0;
+        document.getElementById('ti_'+newStr).innerHTML="0:00";
     } 
     window.$_currentlyPlaying = evt.target;
 }, true);
