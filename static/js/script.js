@@ -1,3 +1,4 @@
+var lastplay="";
 var butts = document.getElementsByClassName("play");
 for (var i = 0; i < butts.length; i++) {
    butts[i].addEventListener("click", playPause);
@@ -10,10 +11,12 @@ for (var i = 0; i < butts.length; i++) {
 }
 
 function playPause(e) {
+   resetplayer(lastplay);
    e = e || window.event;
    e = e.target || e.srcElement;
    var str = e.id;
    id = str.substring(3, str.length);
+   lastplay = id;
    video = document.getElementById("myvid_" + id);
    play = document.getElementById("pl_" + id);
    pause = document.getElementById("pa_" + id);
@@ -28,6 +31,13 @@ function playPause(e) {
       progress.value = video.currentTime / video.duration;
       timer.innerHTML = calculateTime(video.currentTime);
       timerend.innerHTML = calculateTime(video.duration);
+      if(video.currentTime == video.duration)
+      {
+        progress.value=0;
+        timer.innerHTML = "0:00";
+        pause.style.display = "none";
+        play.style.display = "inline";
+      }
    });
 
    if (video.paused) {
@@ -39,6 +49,22 @@ function playPause(e) {
       video.pause();
       pause.style.display = "none";
       play.style.display = "inline";
+   }
+}
+function resetplayer(id)
+{  
+   
+   if(id!=""){   
+      video = document.getElementById("myvid_" + id);
+      play = document.getElementById("pl_" + id);
+      pause = document.getElementById("pa_" + id);
+      progress = document.getElementById("pr_" + id)
+      timer = document.getElementById("ti_" + id)
+      video.currentTime=0;
+      progress.value = video.currentTime / video.duration;
+      timer.innerHTML = "0:00";
+      play.style.display = "inline";
+      pause.style.display = "none";
    }
 }
 const calculateTime = (secs) => {
